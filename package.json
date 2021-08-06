@@ -1,0 +1,45 @@
+{
+    "name": "bootcamp-starter",
+    "packageManager": "yarn@3.0.0",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "lint-staged": {
+        "*.{scss,css}": [
+            "yarn run prettier",
+            "yarn run stylelint-fix"
+        ],
+        "*.{js,json,md}": [
+            "yarn run prettier"
+        ],
+        "*.{ts,tsx}": [
+            "yarn run prettier",
+            "yarn run lint-fix"
+        ]
+    },
+    "scripts": {
+        "build": "yarn workspaces foreach -pt run build",
+        "clean": "yarn workspaces foreach -pt run clean && rimraf node_modules",
+        "lint": "eslint --ext .tsx,.ts packages/ --quiet",
+        "lint-fix": "eslint --fix",
+        "stylelint": "stylelint",
+        "stylelint-fix": "yarn run stylelint --fix",
+        "prettier": "prettier --write",
+        "postinstall": "husky install"
+    },
+    "devDependencies": {
+        "@types/eslint": "^7.28.0",
+        "@types/prettier": "^2.3.2",
+        "@types/stylelint": "^13.13.1",
+        "eslint": "^7.32.0",
+        "eslint-config-next": "^11.0.1",
+        "husky": "^7.0.1",
+        "lint-staged": "^11.1.1",
+        "prettier": "^2.3.2",
+        "stylelint": "^13.13.1",
+        "stylelint-config-css-modules": "^2.2.0",
+        "stylelint-config-prettier": "^8.0.2",
+        "stylelint-config-standard": "^22.0.0"
+    }
+}

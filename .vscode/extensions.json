@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "apollographql.vscode-apollo",
+        "arcanis.vscode-zipfs",
+        "bradlc.vscode-tailwindcss",
+        "clinyong.vscode-css-modules",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "stylelint.vscode-stylelint"
+    ]
+}

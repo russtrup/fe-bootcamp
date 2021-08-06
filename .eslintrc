@@ -1,0 +1,21 @@
+{
+    "env": {
+      "node": true,
+      "browser": true,
+      "commonjs": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "next",
+      "next/core-web-vitals"
+    ],
+    "ignorePatterns": ["**/graphql-types.tsx"],
+    "plugins": ["react"],
+    "rules": {
+      "no-unused-vars": ["error", { "args": "none" }],
+      "react/display-name": "off", // React component needs display name
+      "react/prop-types": "off" // We don't need prop type validation because we have typescript
+    }
+  }
+  
