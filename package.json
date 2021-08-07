@@ -1,5 +1,5 @@
 {
-    "name": "bootcamp-starter",
+    "name": "@bootcamp/root",
     "packageManager": "yarn@3.0.0",
     "private": true,
     "workspaces": [

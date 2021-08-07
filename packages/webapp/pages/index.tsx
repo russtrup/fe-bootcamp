@@ -1,6 +1,8 @@
+import { withApollo } from '@bootcamp/graphql';
 import Head from 'next/head';
+import { Carousel } from '../components/Carousel';
 
-export default function Home() {
+const Home = () => {
     return (
         <div className={'bg-black min-h-screen flex flex-col items-center justify-center'}>
             <Head>
@@ -17,8 +19,10 @@ export default function Home() {
                 </nav>
             </div>
             <main className={'content flex-1 w-full'}>
-                <div className={'carousel'}>{'Items go here'}</div>
+                <Carousel />
             </main>
         </div>
     );
-}
+};
+
+export default withApollo(Home);
