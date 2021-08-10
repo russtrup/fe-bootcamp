@@ -1,3 +1,4 @@
+import { getDataFromTree } from '@apollo/client/react/ssr';
 import { withApollo } from '@bootcamp/graphql';
 import Head from 'next/head';
 import { Carousel } from '../components/Carousel';
@@ -25,4 +26,4 @@ const Home = () => {
     );
 };
 
-export default withApollo(Home);
+export default withApollo(Home, { getDataFromTree });
