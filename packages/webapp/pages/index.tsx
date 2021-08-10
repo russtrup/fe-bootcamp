@@ -2,6 +2,7 @@ import { getDataFromTree } from '@apollo/client/react/ssr';
 import { withApollo } from '@bootcamp/graphql';
 import Head from 'next/head';
 import { Carousel } from '../components/Carousel';
+import { LaunchModal } from '../components/LaunchModal';
 
 const Home = () => {
     return (
@@ -22,6 +23,7 @@ const Home = () => {
             <main className={'content flex-1 w-full'}>
                 <Carousel title={'Past Launches'} />
             </main>
+            <LaunchModal />
         </div>
     );
 };

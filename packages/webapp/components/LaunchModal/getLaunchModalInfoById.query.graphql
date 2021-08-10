@@ -1,0 +1,10 @@
+query launchModalInfoById($id: ID!) {
+    launch(id: $id) {
+        mission_name
+        details
+        links {
+            video_link
+            flickr_images
+        }
+    }
+}
