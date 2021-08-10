@@ -1,4 +1,4 @@
-# Frontend Bootcamp
+# Frontend Bootcamp Pt 1
 
 To get started we're going to make an empty folder. Inside, create a pacakges folder, and inside tat a webapp folder. We're setting up our project to be compartmentalized from the start
 
@@ -798,8 +798,30 @@ Before we wrap up this portion, let's update the `yarn dev` task in the webapp t
 
 At this point we have all of the tools we need to query the SpaceX API with minimal code and can build any UI we want on top of it. This current setup can serve as a jumping off point for quick POCs, hackathon projects, personal projects, etc.
 
-Up Next:
+## Aug 10 Edits:
 
--   SSR
--   Redux Usage
--   Component Design
+-   Make sure you've followed the steps above to get both watch scripts running
+-   There's a couple changes to the graphql package that got missed
+
+```console
+~/bootcamp-starter/packages/graphql$ yarn add --dev @graphql-codegen/typescript-apollo-client-helpers
+```
+
+```yml
+# codegen.yml
+overwrite: true
+schema: 'https://raw.githubusercontent.com/SpaceXLand/api/master/schema.graphql'
+documents: '../webapp/**/*.graphql'
+generates:
+    src/generated/graphql-types.tsx:
+        plugins:
+            - 'typescript'
+            - 'typescript-operations'
+            - 'typescript-react-apollo'
+            - 'typescript-apollo-client-helpers'
+        config:
+            maybeValue: T | undefined
+    ./graphql.schema.json:
+        plugins:
+            - 'introspection'
+```
