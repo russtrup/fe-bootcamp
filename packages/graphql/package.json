@@ -18,6 +18,7 @@
         "@graphql-codegen/typescript-react-apollo": "3.0.0"
     },
     "scripts": {
-        "generate": "graphql-codegen --config codegen.yml"
+        "generate": "graphql-codegen --config codegen.yml",
+        "generate:watch": "yarn run generate --watch"
     }
 }
