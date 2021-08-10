@@ -1,5 +1,5 @@
 query getPastLaunches($offset: Int, $limit: Int) {
     launchesPast(limit: $limit, offset: $offset) {
-        id
+        ...LaunchThumbnail
     }
 }

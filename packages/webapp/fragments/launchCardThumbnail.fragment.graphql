@@ -1,0 +1,7 @@
+fragment LaunchThumbnail on Launch {
+    id
+    mission_name
+    links {
+        video_link
+    }
+}

@@ -959,7 +959,16 @@ export type GetPastLaunchesQueryVariables = Exact<{
 
 export type GetPastLaunchesQuery = {
     __typename?: 'Query';
-    launchesPast?: Maybe<Array<Maybe<{ __typename?: 'Launch'; id?: Maybe<string> }>>>;
+    launchesPast?: Maybe<
+        Array<
+            Maybe<{
+                __typename?: 'Launch';
+                id?: Maybe<string>;
+                mission_name?: Maybe<string>;
+                links?: Maybe<{ __typename?: 'LaunchLinks'; video_link?: Maybe<string> }>;
+            }>
+        >
+    >;
 };
 
 export type GetLaunchByIdQueryVariables = Exact<{
@@ -995,12 +1004,29 @@ export type LaunchModalInfoByIdQuery = {
     }>;
 };
 
+export type LaunchThumbnailFragment = {
+    __typename?: 'Launch';
+    id?: Maybe<string>;
+    mission_name?: Maybe<string>;
+    links?: Maybe<{ __typename?: 'LaunchLinks'; video_link?: Maybe<string> }>;
+};
+
+export const LaunchThumbnailFragmentDoc = gql`
+    fragment LaunchThumbnail on Launch {
+        id
+        mission_name
+        links {
+            video_link
+        }
+    }
+`;
 export const GetPastLaunchesDocument = gql`
     query getPastLaunches($offset: Int, $limit: Int) {
         launchesPast(limit: $limit, offset: $offset) {
-            id
+            ...LaunchThumbnail
         }
     }
+    ${LaunchThumbnailFragmentDoc}
 `;
 
 /**
@@ -1038,13 +1064,10 @@ export type GetPastLaunchesQueryResult = Apollo.QueryResult<GetPastLaunchesQuery
 export const GetLaunchByIdDocument = gql`
     query getLaunchById($id: ID!) {
         launch(id: $id) {
-            id
-            mission_name
-            links {
-                video_link
-            }
+            ...LaunchThumbnail
         }
     }
+    ${LaunchThumbnailFragmentDoc}
 `;
 
 /**
