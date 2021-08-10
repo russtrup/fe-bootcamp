@@ -1,5 +1,7 @@
 import { useGetLaunchByIdQuery } from '@bootcamp/graphql';
+import { launchStoreActions, modalStoreActions } from '@bootcamp/stores';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { getYoutubeThumbnail } from '../../utils/youtube.utils';
 import { LaunchCardProps } from './LaunchCard.types';
 
@@ -12,8 +14,17 @@ const LaunchCard: React.FunctionComponent<LaunchCardProps> = ({ id }: LaunchCard
 
     const videoThumbnail = getYoutubeThumbnail(data?.launch?.links?.video_link ?? '');
 
+    const dispatch = useDispatch();
+    const selectLaunch = () => {
+        if (!id) {
+            return;
+        }
+        dispatch(launchStoreActions.setActiveLaunch(id));
+        dispatch(modalStoreActions.openLaunchCardModal());
+    };
+
     return (
-        <button className={'w-full relative'}>
+        <button className={'w-full relative'} onClick={() => selectLaunch()}>
             <div className={'bg-gray-800 rounded-sm'}>
                 <div className={'thumbnail-photo h-56 relative'}>
                     <div
