@@ -1,4 +1,4 @@
-import { launchStoreSelectors, modalStoreActions, modalStoreSelectors } from '@bootcamp/stores';
+import { launchStoreActions, launchStoreSelectors, modalStoreActions, modalStoreSelectors } from '@bootcamp/stores';
 import cn from 'classnames';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,12 +11,18 @@ const LaunchModal: React.FunctionComponent = () => {
     const showLaunchModal = useSelector(modalStoreSelectors.selectIsLaunchModalOpen);
     const selectedLaunchId = useSelector(launchStoreSelectors.selectChosenLaunchId);
     const closeLaunchModal = () => dispatch(modalStoreActions.closeLaunchCardModal());
+    const clearActiveLaunch = () => dispatch(launchStoreActions.clearActiveLaunch());
 
     const { data } = useLaunchModalInfoByIdQuery({
         variables: {
             id: selectedLaunchId,
         },
     });
+
+    const onClose = () => {
+        closeLaunchModal();
+        clearActiveLaunch();
+    };
 
     return (
         <div
@@ -50,7 +56,7 @@ const LaunchModal: React.FunctionComponent = () => {
                 <div className={'close-modal absolute top-0 right-0'}>
                     <button
                         className={'text-gray-50 hover:bg-gray-700 transition-colors duration-50 text-2xl px-6 py-4'}
-                        onClick={() => closeLaunchModal()}
+                        onClick={() => onClose()}
                     >
                         {'x'}
                     </button>
