@@ -3,6 +3,7 @@ import cn from 'classnames';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLaunchModalInfoByIdQuery } from '../../../graphql/src';
+import { ImageGallery } from '../ImageGallery';
 import { YoutubeEmbed } from '../YoutubeEmbed';
 
 const LaunchModal: React.FunctionComponent = () => {
@@ -39,12 +40,12 @@ const LaunchModal: React.FunctionComponent = () => {
                         <YoutubeEmbed videoLink={data?.launch?.links?.video_link ?? ''} />
                     </div>
                 </div>
-                <div className={'col-right flex flex-col w-full bg-gray-800'}>
-                    <h2 className={'launchName text-2xl text-gray-200 pt-16 pl-8 pr-16'}>
-                        {data?.launch?.mission_name}
-                    </h2>
-                    <h3 className={'launchDescription text-md text-gray-200 p-8 pb-0'}>{data?.launch?.details}</h3>
-                    <div className={'launchPhotos'}>{/* <ImageGallery data?.launch?.links?.flickr_images/> */}</div>
+                <div className={'col-right flex flex-col w-full bg-gray-800 pt-16 pb-8 px-8 overflow-hidden'}>
+                    <h2 className={'launchName text-2xl text-gray-200 pr-16'}>{data?.launch?.mission_name}</h2>
+                    <h3 className={'launchDescription text-md text-gray-200 mt-8 pb-0'}>{data?.launch?.details}</h3>
+                    <div className={'launchPhotos flex-1 mt-8 overflow-y-auto'}>
+                        <ImageGallery imageLinks={data?.launch?.links?.flickr_images ?? []} />
+                    </div>
                 </div>
                 <div className={'close-modal absolute top-0 right-0'}>
                     <button

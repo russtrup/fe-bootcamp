@@ -984,6 +984,7 @@ export type LaunchModalInfoByIdQuery = {
     __typename?: 'Query';
     launch?: Maybe<{
         __typename?: 'Launch';
+        id?: Maybe<string>;
         mission_name?: Maybe<string>;
         details?: Maybe<string>;
         links?: Maybe<{
@@ -1080,6 +1081,7 @@ export type GetLaunchByIdQueryResult = Apollo.QueryResult<GetLaunchByIdQuery, Ge
 export const LaunchModalInfoByIdDocument = gql`
     query launchModalInfoById($id: ID!) {
         launch(id: $id) {
+            id
             mission_name
             details
             links {
