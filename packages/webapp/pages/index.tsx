@@ -19,7 +19,7 @@ const Home = () => {
                 </nav>
             </div>
             <main className={'content flex-1 w-full'}>
-                <Carousel />
+                <Carousel title={'Past Launches'} />
             </main>
         </div>
     );
