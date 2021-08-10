@@ -3,6 +3,7 @@ import cn from 'classnames';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLaunchModalInfoByIdQuery } from '../../../graphql/src';
+import { YoutubeEmbed } from '../YoutubeEmbed';
 
 const LaunchModal: React.FunctionComponent = () => {
     const dispatch = useDispatch();
@@ -34,8 +35,8 @@ const LaunchModal: React.FunctionComponent = () => {
                 )}
             >
                 <div className={'col-left'}>
-                    <div className={'videoPlayer'}>
-                        {/* <YoutoubeEmbed link={data?.launch?.links?.video_link} /> */}
+                    <div className={'videoPlayer flex items-center justify-center py-16'}>
+                        <YoutubeEmbed videoLink={data?.launch?.links?.video_link ?? ''} />
                     </div>
                 </div>
                 <div className={'col-right flex flex-col w-full bg-gray-800'}>
