@@ -731,6 +731,7 @@ __metadata:
     "@graphql-codegen/cli": 2.0.1
     "@graphql-codegen/introspection": 2.0.0
     "@graphql-codegen/typescript": 2.0.0
+    "@graphql-codegen/typescript-apollo-client-helpers": ^2.0.0
     "@graphql-codegen/typescript-operations": 2.0.1
     "@graphql-codegen/typescript-react-apollo": 3.0.0
     apollo-utilities: ^1.3.4
@@ -924,6 +925,21 @@ __metadata:
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
   checksum: 517fb2299b9ba7a56a4bf692812e0c127f635db236bc3f6fd15bf6b338d07278b3b2f73d323df4a40c5dc1a1549c66ab326f3025563b62d354492a68a828abd9
+  languageName: node
+  linkType: hard
+
+"@graphql-codegen/typescript-apollo-client-helpers@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@graphql-codegen/typescript-apollo-client-helpers@npm:2.0.0"
+  dependencies:
+    "@graphql-codegen/plugin-helpers": ^2.0.0
+    "@graphql-codegen/visitor-plugin-common": 2.0.0
+    auto-bind: ~4.0.0
+    change-case-all: 1.0.14
+    tslib: ~2.3.0
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
+  checksum: b5c331f40240d7e685a7f4b393af60b7db01d73955d91224e5512d00d1dc81a83fe6c3ed7f6a2b86b3bc45273e22e4459fd8e654f87326dca2da63a50fc3f824
   languageName: node
   linkType: hard
 
