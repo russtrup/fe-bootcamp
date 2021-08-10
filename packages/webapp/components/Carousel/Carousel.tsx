@@ -1,5 +1,6 @@
 import { useGetPastLaunchesQuery } from '@bootcamp/graphql';
 import React, { useMemo, useState } from 'react';
+import { LaunchCard } from '../LaunchCard';
 import { CarouselProps } from './Carousel.types';
 
 const pageSize = 5;
@@ -8,7 +9,7 @@ const Carousel: React.FunctionComponent<CarouselProps> = ({ title }: CarouselPro
     const { data, fetchMore } = useGetPastLaunchesQuery({
         variables: {
             offset: 0,
-            limit: pageSize,
+            limit: pageSize * 2,
         },
     });
 
@@ -25,7 +26,7 @@ const Carousel: React.FunctionComponent<CarouselProps> = ({ title }: CarouselPro
         
         You could do this in a useEffect but you run the risk of dependency thrashing.
         By performing this action, we guarantee it only executes at most once per user interaction */
-        if ((data?.launchesPast?.length ?? 0) <= currentPage * pageSize + pageSize) {
+        if ((data?.launchesPast?.length ?? 0) <= currentPage * pageSize + pageSize * 3) {
             // For pagination to work as expected, we need to update the typePolicies in initializeApolloClient.ts
             fetchMore({
                 variables: {
@@ -53,10 +54,10 @@ const Carousel: React.FunctionComponent<CarouselProps> = ({ title }: CarouselPro
         <div className={'w-full'}>
             <div className={'title text-gray-100 p-4 pl-12 text-left text-xl'}>{title}</div>
             <div className={'group items-wrapper w-full px-12 relative'}>
-                <div className={'items py-8'}>
+                <div className={'items'}>
                     {currentItems.map((lp) => (
                         <div className={'card-wrapper w-1/5 inline-block p-1'} key={lp?.id}>
-                            {/* <LaunchCard id={id}/> */}
+                            <LaunchCard id={lp?.id} />
                         </div>
                     ))}
                 </div>

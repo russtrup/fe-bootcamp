@@ -2,12 +2,15 @@ overwrite: true
 schema: "https://raw.githubusercontent.com/SpaceXLand/api/master/schema.graphql"
 documents: "../webapp/**/*.graphql"
 generates:
+  
   src/generated/graphql-types.tsx:
     plugins:
       - "typescript"
       - "typescript-operations"
       - "typescript-react-apollo"
       - "typescript-apollo-client-helpers" # Expose typing for TypePolicies
+    config:
+      maybeValue: T | undefined
   ./graphql.schema.json:
     plugins:
       - "introspection"

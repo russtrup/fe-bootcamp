@@ -1,0 +1,9 @@
+query getLaunchById($id: ID!) {
+    launch(id: $id) {
+        id
+        mission_name
+        links {
+            video_link
+        }
+    }
+}

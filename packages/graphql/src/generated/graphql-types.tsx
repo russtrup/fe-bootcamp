@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 import { FieldPolicy, FieldReadFunction, TypePolicies, TypePolicy } from '@apollo/client/cache';
-export type Maybe<T> = T | null;
+export type Maybe<T> = T | undefined;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -962,6 +962,20 @@ export type GetPastLaunchesQuery = {
     launchesPast?: Maybe<Array<Maybe<{ __typename?: 'Launch'; id?: Maybe<string> }>>>;
 };
 
+export type GetLaunchByIdQueryVariables = Exact<{
+    id: Scalars['ID'];
+}>;
+
+export type GetLaunchByIdQuery = {
+    __typename?: 'Query';
+    launch?: Maybe<{
+        __typename?: 'Launch';
+        id?: Maybe<string>;
+        mission_name?: Maybe<string>;
+        links?: Maybe<{ __typename?: 'LaunchLinks'; video_link?: Maybe<string> }>;
+    }>;
+};
+
 export const GetPastLaunchesDocument = gql`
     query getPastLaunches($offset: Int, $limit: Int) {
         launchesPast(limit: $limit, offset: $offset) {
@@ -1002,6 +1016,49 @@ export function useGetPastLaunchesLazyQuery(
 export type GetPastLaunchesQueryHookResult = ReturnType<typeof useGetPastLaunchesQuery>;
 export type GetPastLaunchesLazyQueryHookResult = ReturnType<typeof useGetPastLaunchesLazyQuery>;
 export type GetPastLaunchesQueryResult = Apollo.QueryResult<GetPastLaunchesQuery, GetPastLaunchesQueryVariables>;
+export const GetLaunchByIdDocument = gql`
+    query getLaunchById($id: ID!) {
+        launch(id: $id) {
+            id
+            mission_name
+            links {
+                video_link
+            }
+        }
+    }
+`;
+
+/**
+ * __useGetLaunchByIdQuery__
+ *
+ * To run a query within a React component, call `useGetLaunchByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLaunchByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLaunchByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetLaunchByIdQuery(
+    baseOptions: Apollo.QueryHookOptions<GetLaunchByIdQuery, GetLaunchByIdQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<GetLaunchByIdQuery, GetLaunchByIdQueryVariables>(GetLaunchByIdDocument, options);
+}
+export function useGetLaunchByIdLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<GetLaunchByIdQuery, GetLaunchByIdQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<GetLaunchByIdQuery, GetLaunchByIdQueryVariables>(GetLaunchByIdDocument, options);
+}
+export type GetLaunchByIdQueryHookResult = ReturnType<typeof useGetLaunchByIdQuery>;
+export type GetLaunchByIdLazyQueryHookResult = ReturnType<typeof useGetLaunchByIdLazyQuery>;
+export type GetLaunchByIdQueryResult = Apollo.QueryResult<GetLaunchByIdQuery, GetLaunchByIdQueryVariables>;
 export type AddressKeySpecifier = ('address' | 'city' | 'state' | AddressKeySpecifier)[];
 export type AddressFieldPolicy = {
     address?: FieldPolicy<any> | FieldReadFunction<any>;

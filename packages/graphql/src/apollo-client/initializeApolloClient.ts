@@ -1,5 +1,6 @@
 import type { NormalizedCacheObject } from '@apollo/client';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { BatchHttpLink } from '@apollo/client/link/batch-http';
 import { offsetLimitPagination } from '@apollo/client/utilities';
 import { Launch, TypedTypePolicies } from '../generated/graphql-types';
 
@@ -18,11 +19,18 @@ const initializeApolloClient = ({ graphqlUri, initialState }: ApolloClientOption
         },
     };
 
+    const link = new BatchHttpLink({
+        uri: graphqlUri,
+        batchMax: 5,
+        batchInterval: 20,
+    });
+
     const cache = new InMemoryCache({ typePolicies }).restore(initialState || {});
 
     return new ApolloClient({
         uri: graphqlUri,
         cache,
+        link,
     });
 };
 
