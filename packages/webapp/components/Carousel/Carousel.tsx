@@ -1,19 +1,5 @@
-import { gql } from '@apollo/client';
+import { useGetPastLaunchesQuery } from '@bootcamp/graphql';
 import React from 'react';
-import { useGetPastLaunchesQuery } from '../../../graphql/src';
-
-// eslint-disable-next-line no-unused-vars
-const pastLaunch = gql`
-    query getPastLaunches($offset: Int, $limit: Int) {
-        launchesPast(limit: $limit, offset: $offset) {
-            id
-            mission_name
-            links {
-                video_link
-            }
-        }
-    }
-`;
 
 const Carousel: React.FunctionComponent = React.memo(() => {
     const { data } = useGetPastLaunchesQuery({
