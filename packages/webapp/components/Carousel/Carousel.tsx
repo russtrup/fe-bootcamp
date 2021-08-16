@@ -3,8 +3,6 @@ import React, { useMemo, useState } from 'react';
 import { LaunchCard } from '../LaunchCard';
 import { CarouselProps } from './Carousel.types';
 
-import React from 'react';
-
 const pageSize = 5;
 
 const Carousel: React.FunctionComponent<CarouselProps> = ({ title }: CarouselProps) => {
@@ -17,6 +15,14 @@ const Carousel: React.FunctionComponent<CarouselProps> = ({ title }: CarouselPro
 
     const [currentPage, setCurrentPage] = useState(0);
 
+    const loadMoreData = () =>
+        fetchMore({
+            variables: {
+                offset: data?.launchesPast?.length,
+                limit: pageSize,
+            },
+        });
+
     const changePage = (offset: 1 | -1) => {
         // Don't let the page go < 0
         setCurrentPage(Math.max(0, currentPage + offset));
@@ -27,15 +33,13 @@ const Carousel: React.FunctionComponent<CarouselProps> = ({ title }: CarouselPro
         data that we don't have yet, we can fetch more data with apollo
         
         You could do this in a useEffect but you run the risk of dependency thrashing.
-        By performing this action, we guarantee it only executes at most once per user interaction */
+        By performing this action, we guarantee it only executes at most once per user interaction.
+        
+        This condition is using a bit of a lookahead (pageSize * 3) to fetch a bit of extra data
+        to reduce number of loading screens shown*/
         if ((data?.launchesPast?.length ?? 0) <= currentPage * pageSize + pageSize * 3) {
             // For pagination to work as expected, we need to update the typePolicies in initializeApolloClient.ts
-            fetchMore({
-                variables: {
-                    offset: data?.launchesPast?.length,
-                    limit: pageSize,
-                },
-            });
+            loadMoreData();
         }
 
         changePage(1);
