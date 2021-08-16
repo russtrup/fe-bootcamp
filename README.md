@@ -1,5 +1,69 @@
 # Frontend Onboarding Bootcamp
 
+## Pre-Reading Materials ( & Concepts that will be built upon)
+
+TypeScript Handbook:
+
+-   https://www.typescriptlang.org/docs/handbook/intro.html
+
+Yarn 2:
+
+-   https://yarnpkg.com/features/workspaces
+-   Yarn 2 is quite different from version 1. Please familiarize yourself with the new features and capabilities
+
+ReactJS:
+
+-   https://reactjs.org/docs/getting-started.html
+
+State Management via Hooks:
+
+-   https://reactjs.org/docs/hooks-intro.html
+-   Once you understand what each hook does and when to use, become familiar with how the hooks actually work, when they re-trigger and gotchas to be aware of
+
+Thinking in Redux
+
+-   https://redux.js.org/introduction/core-concepts
+
+Redux Toolkit
+
+-   https://redux-toolkit.js.org/introduction/getting-started
+
+Thinking in GraphQL
+
+-   https://graphql.org/learn/
+
+Apollo GrpaphQL Client
+
+-   https://apollographql.com/docs/react/
+
+Next.js
+
+-   https://nextjs.org/learn/basics/create-nextjs-app
+-   What are the benefits of server-rendered pages?
+
+CSS
+
+-   What’s the difference between em, rem and px?
+-   When to use margin vs padding?
+
+Flexbox layouts:
+
+-   https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+Grid layouts:
+
+-   https://css-tricks.com/snippets/css/complete-guide-grid/
+
+CSS Modules:
+
+-   https://css-tricks.com/css-modules-part-1-need/
+
+Tailwind CSS:
+
+-   https://tailwindcss.com/
+
+## Getting started
+
 To get started we're going to make an empty folder. Inside, create a pacakges folder, and inside tat a webapp folder. We're setting up our project to be compartmentalized from the start
 
 ```console
