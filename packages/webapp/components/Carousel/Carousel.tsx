@@ -3,6 +3,8 @@ import React, { useMemo, useState } from 'react';
 import { LaunchCard } from '../LaunchCard';
 import { CarouselProps } from './Carousel.types';
 
+import React from 'react';
+
 const pageSize = 5;
 
 const Carousel: React.FunctionComponent<CarouselProps> = ({ title }: CarouselProps) => {
