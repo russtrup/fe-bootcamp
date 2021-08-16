@@ -971,16 +971,62 @@ export type GetPastLaunchesQuery = {
     >;
 };
 
+export type GetLaunchByIdQueryVariables = Exact<{
+    id: Scalars['ID'];
+}>;
+
+export type GetLaunchByIdQuery = {
+    __typename?: 'Query';
+    launch?: Maybe<{
+        __typename?: 'Launch';
+        id?: Maybe<string>;
+        mission_name?: Maybe<string>;
+        links?: Maybe<{ __typename?: 'LaunchLinks'; video_link?: Maybe<string> }>;
+    }>;
+};
+
+export type LaunchModalInfoByIdQueryVariables = Exact<{
+    id: Scalars['ID'];
+}>;
+
+export type LaunchModalInfoByIdQuery = {
+    __typename?: 'Query';
+    launch?: Maybe<{
+        __typename?: 'Launch';
+        id?: Maybe<string>;
+        mission_name?: Maybe<string>;
+        details?: Maybe<string>;
+        links?: Maybe<{
+            __typename?: 'LaunchLinks';
+            video_link?: Maybe<string>;
+            flickr_images?: Maybe<Array<Maybe<string>>>;
+        }>;
+    }>;
+};
+
+export type LaunchThumbnailFragment = {
+    __typename?: 'Launch';
+    id?: Maybe<string>;
+    mission_name?: Maybe<string>;
+    links?: Maybe<{ __typename?: 'LaunchLinks'; video_link?: Maybe<string> }>;
+};
+
+export const LaunchThumbnailFragmentDoc = gql`
+    fragment LaunchThumbnail on Launch {
+        id
+        mission_name
+        links {
+            video_link
+        }
+    }
+`;
 export const GetPastLaunchesDocument = gql`
     query getPastLaunches($offset: Int, $limit: Int) {
         launchesPast(limit: $limit, offset: $offset) {
-            id
-            mission_name
-            links {
-                video_link
-            }
+            ...LaunchThumbnail
         }
     }
+    ${LaunchThumbnailFragmentDoc}
 `;
 
 /**
@@ -1015,6 +1061,100 @@ export function useGetPastLaunchesLazyQuery(
 export type GetPastLaunchesQueryHookResult = ReturnType<typeof useGetPastLaunchesQuery>;
 export type GetPastLaunchesLazyQueryHookResult = ReturnType<typeof useGetPastLaunchesLazyQuery>;
 export type GetPastLaunchesQueryResult = Apollo.QueryResult<GetPastLaunchesQuery, GetPastLaunchesQueryVariables>;
+export const GetLaunchByIdDocument = gql`
+    query getLaunchById($id: ID!) {
+        launch(id: $id) {
+            ...LaunchThumbnail
+        }
+    }
+    ${LaunchThumbnailFragmentDoc}
+`;
+
+/**
+ * __useGetLaunchByIdQuery__
+ *
+ * To run a query within a React component, call `useGetLaunchByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLaunchByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLaunchByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetLaunchByIdQuery(
+    baseOptions: Apollo.QueryHookOptions<GetLaunchByIdQuery, GetLaunchByIdQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<GetLaunchByIdQuery, GetLaunchByIdQueryVariables>(GetLaunchByIdDocument, options);
+}
+export function useGetLaunchByIdLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<GetLaunchByIdQuery, GetLaunchByIdQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<GetLaunchByIdQuery, GetLaunchByIdQueryVariables>(GetLaunchByIdDocument, options);
+}
+export type GetLaunchByIdQueryHookResult = ReturnType<typeof useGetLaunchByIdQuery>;
+export type GetLaunchByIdLazyQueryHookResult = ReturnType<typeof useGetLaunchByIdLazyQuery>;
+export type GetLaunchByIdQueryResult = Apollo.QueryResult<GetLaunchByIdQuery, GetLaunchByIdQueryVariables>;
+export const LaunchModalInfoByIdDocument = gql`
+    query launchModalInfoById($id: ID!) {
+        launch(id: $id) {
+            id
+            mission_name
+            details
+            links {
+                video_link
+                flickr_images
+            }
+        }
+    }
+`;
+
+/**
+ * __useLaunchModalInfoByIdQuery__
+ *
+ * To run a query within a React component, call `useLaunchModalInfoByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLaunchModalInfoByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLaunchModalInfoByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useLaunchModalInfoByIdQuery(
+    baseOptions: Apollo.QueryHookOptions<LaunchModalInfoByIdQuery, LaunchModalInfoByIdQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<LaunchModalInfoByIdQuery, LaunchModalInfoByIdQueryVariables>(
+        LaunchModalInfoByIdDocument,
+        options
+    );
+}
+export function useLaunchModalInfoByIdLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<LaunchModalInfoByIdQuery, LaunchModalInfoByIdQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<LaunchModalInfoByIdQuery, LaunchModalInfoByIdQueryVariables>(
+        LaunchModalInfoByIdDocument,
+        options
+    );
+}
+export type LaunchModalInfoByIdQueryHookResult = ReturnType<typeof useLaunchModalInfoByIdQuery>;
+export type LaunchModalInfoByIdLazyQueryHookResult = ReturnType<typeof useLaunchModalInfoByIdLazyQuery>;
+export type LaunchModalInfoByIdQueryResult = Apollo.QueryResult<
+    LaunchModalInfoByIdQuery,
+    LaunchModalInfoByIdQueryVariables
+>;
 export type AddressKeySpecifier = ('address' | 'city' | 'state' | AddressKeySpecifier)[];
 export type AddressFieldPolicy = {
     address?: FieldPolicy<any> | FieldReadFunction<any>;

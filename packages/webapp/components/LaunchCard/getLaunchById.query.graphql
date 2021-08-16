@@ -1,0 +1,5 @@
+query getLaunchById($id: ID!) {
+    launch(id: $id) {
+        ...LaunchThumbnail
+    }
+}
