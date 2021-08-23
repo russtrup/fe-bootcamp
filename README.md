@@ -503,6 +503,20 @@ Now let's pull it into our webapp
 ~/bootcamp-starter/packages/webapp$ yarn add @bootcamp/graphql
 ```
 
+Once we do this though, we need to tell next.js that this local module requires transpilation, since it's Typescript we're importing.
+
+```console
+~/webapp-starter/packages/webapp$ yarn add next-transpile-modules
+```
+
+```js
+// webapp/next.config.js
+// pass the modules you would like to see transpiled
+const withTM = require('next-transpile-modules')(['@project/graphql']);
+
+module.exports = withTM();
+```
+
 ```tsx
 // pages/index.tsx
 import { withApollo } from '@bootcamp/graphql';
